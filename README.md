@@ -1,7 +1,3 @@
-**Table of contents**
-
-[[_ToC_]]
-
 # TTS Service API (Python)
 
 The collection of gRPC APIs for TTS Service solutions supplied as a Python package.
@@ -34,14 +30,6 @@ pip install --require-virtualenv .
 The package provides a precompiled collection of .proto files. These can be imported directly or through the alias modules.
 
 Example:
-
-- direct import
-
-```python
->>> import techmo_tts_pb2 as api
->>> hasattr(api, "SynthesizeRequest")
-True
-```
 
 - import from an alias module
 
