@@ -4,7 +4,7 @@
 
 # TTS Service API (Python)
 
-The collection of gRPC APIs for TTS Service solutions from the [tts-service-api](https://gitlab.devtechmo.pl/tts/tts-service-api) repository supplied as a Python package.
+The collection of gRPC APIs for TTS Service solutions supplied as a Python package.
 
 ## Setup
 
@@ -26,8 +26,6 @@ source .venv/bin/activate
 pip install --require-virtualenv --upgrade pip
 pip install --require-virtualenv .
 ```
-
-_For basic development use, consider convenient `./install.sh`._
 
 ## Usage
 
@@ -56,7 +54,3 @@ True
 ### Invoke RPC
 
 Invoking RPC simply requires to call a desired method on a [_stub_](https://grpc.io/docs/what-is-grpc/core-concepts/#using-the-api) object dedicated to a specific _service_.
-
-## Docker
-
-The project provides a Dockerfile for a preconfigured development environment, rather used by the CI pipeline.
