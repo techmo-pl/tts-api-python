@@ -1,0 +1,81 @@
+# The generic Techmo's pre-commit hooks configuration.
+#
+# If needed, this file may be used as a starting template for more specific checks.
+# Include a modified one in your target repository and pass its path to `.install.sh`.
+#
+# See https://pre-commit.com for more information.
+# See https://pre-commit.com/hooks.html for more hooks.
+
+fail_fast: false
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-yaml
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+        args:
+          - --markdown-linebreak-ext=md
+      - id: check-symlinks
+
+  - repo: https://github.com/psf/black
+    rev: 22.8.0
+    hooks:
+      - id: black
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.2.1
+    hooks:
+      - id: autoflake
+        args:
+          [
+            --remove-all-unused-imports,
+            --ignore-init-module-imports,
+            --in-place,
+          ]
+        language: python
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: isort (python)
+        args: ["--profile", "black"]
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.8.0.4
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/maxwinterstein/shfmt-py
+    rev: v3.4.3.1
+    hooks:
+      - id: shfmt
+        name: shfmt
+        entry: shfmt
+        language: python
+        args:
+          - -l # list files whose formatting differs from shfmt's
+          - -d # error with a diff when the formatting differs
+          - -i # indentation
+          - "4" # 4 spaces
+          - -ci # switch cases will be indented
+          - -fn # function opening braces are placed on a separate line
+          - -bn # binary ops like && and | may start a line
+          - -sr # redirect operators will be followed by a space
+          - -s # simplify the code
+          - -w # write result to file instead of stdout
+        types: [shell]
+        require_serial: true
+        exclude_types: [bats]

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["grpcio-tools>=1.43.0", "setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tts_service_api_python"
+description = "Techmo TTS Service API"
+dynamic = ["version"]
+readme = { file = "README.md", content-type = "text/markdown" }
+authors = [{ name = "Techmo sp. z o.o", email = "kontakt@techmo.pl" }]
+maintainers = [{ name = "Urszula Tomana-Chojnacka", email = "urszula.tomana@techmo.pl" }]
+requires-python = ">=3.10"
+dependencies = ["grpcio>=1.43.0", "protobuf<4,>=3.18.1"]
+
+[project.optional-dependencies]
+tests = ["pytest<8,>=7.4.4", "pytest-cov>=4.1.0", "pytest-lazy-fixture>=0.6.3"]
+
+[project.urls]
+repository = "github repository"
+
+[tool.setuptools.dynamic]
+version = { attr = "tts_service_api.VERSION.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["tts_service_api*"]
+
+[tool.pytest.ini_options]
+addopts = ["--strict-markers"]
+markers = ["""api(name): mark tests as defined for <name> API. \
+    Example: api('techmo_tts'). \
+    Use the `--api=<name>` option to collect the marked tests."""]
+testpaths = ["tests"]
+
+[tool.coverage.report]
+precision = 1
+show_missing = true
+
+[tool.coverage.run]
+source_pkgs = ["tts_service_api"]
+relative_files = true
