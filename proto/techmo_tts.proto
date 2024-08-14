@@ -1,0 +1,270 @@
+// Techmo TTS API
+// version: 3.2.0
+// authors: Tomasz Jadczyk, Michal Radziszewski
+// date:    2024-03-26
+syntax = "proto3";
+
+package techmo.tts.api.v3;
+
+service TTS
+{
+	rpc GetServiceVersion(GetServiceVersionRequest) returns (GetServiceVersionResponse);
+	rpc GetResourcesId(GetResourcesIdRequest) returns (GetResourcesIdResponse);
+
+	rpc ListVoices(ListVoicesRequest) returns (ListVoicesResponse);
+	rpc ListSoundIcons(ListSoundIconsRequest) returns (ListSoundIconsResponse);
+	rpc ListRecordings(ListRecordingsRequest) returns (ListRecordingsResponse);
+	rpc ListLexicons(ListLexiconsRequest) returns (ListLexiconsResponse);
+
+	rpc SynthesizeStreaming(SynthesizeRequest) returns (stream SynthesizeResponse);
+	rpc Synthesize(SynthesizeRequest) returns (SynthesizeResponse);
+
+	rpc GetChannelsUsage(GetChannelsUsageRequest) returns (GetChannelsUsageResponse);
+
+	rpc PutRecording(PutRecordingRequest) returns (PutRecordingResponse);
+	rpc DeleteRecording(DeleteRecordingRequest) returns (DeleteRecordingResponse);
+	rpc GetRecording(GetRecordingRequest) returns (GetRecordingResponse);
+
+	rpc PutLexicon(PutLexiconRequest) returns (PutLexiconResponse);
+	rpc DeleteLexicon(DeleteLexiconRequest) returns (DeleteLexiconResponse);
+	rpc GetLexicon(GetLexiconRequest) returns (GetLexiconResponse);
+}
+
+message GetServiceVersionRequest
+{
+}
+
+message GetServiceVersionResponse
+{
+	string version = 1;
+}
+
+message GetResourcesIdRequest
+{
+}
+
+message GetResourcesIdResponse
+{
+	string id = 1;
+}
+
+message ListVoicesRequest
+{
+	string language_code = 1;
+}
+
+message ListVoicesResponse
+{
+	int32 sampling_rate_hz = 1;
+	repeated VoiceInfo voices = 2;
+}
+
+message ListSoundIconsRequest
+{
+	VoiceProfile voice_profile = 1;
+}
+
+message ListSoundIconsResponse
+{
+	repeated string keys = 1;
+}
+
+message ListRecordingsRequest
+{
+	VoiceProfile voice_profile = 1;
+}
+
+message ListRecordingsResponse
+{
+	repeated string keys = 1;
+}
+
+message ListLexiconsRequest
+{
+	string language_code = 1;
+}
+
+message ListLexiconsResponse
+{
+	repeated LexiconInfo lexicons = 1;
+}
+
+message SynthesizeRequest
+{
+	string text = 1;
+	SynthesisConfig synthesis_config = 2;
+	OutputConfig output_config = 3;
+}
+
+message SynthesizeResponse
+{
+	int32 sampling_rate_hz = 1;
+	bytes audio = 2;
+	repeated string warnings = 3;
+	repeated Marker markers = 4;
+}
+
+message GetChannelsUsageRequest
+{
+}
+
+message GetChannelsUsageResponse
+{
+	int32 total_channels_count = 1;
+	int32 used_channels_count = 2;
+}
+
+message PutRecordingRequest
+{
+	VoiceProfile voice_profile = 1;
+	string recording_key = 2;
+
+	int32 sampling_rate_hz = 3;
+	bytes content = 4;
+}
+
+message PutRecordingResponse
+{
+}
+
+message DeleteRecordingRequest
+{
+	VoiceProfile voice_profile = 1;
+	string recording_key = 2;
+}
+
+message DeleteRecordingResponse
+{
+}
+
+message GetRecordingRequest
+{
+	VoiceProfile voice_profile = 1;
+	string recording_key = 2;
+}
+
+message GetRecordingResponse
+{
+	int32 sampling_rate_hz = 1;
+	bytes content = 2;
+}
+
+message PutLexiconRequest
+{
+	string uri = 1;
+
+	OutsideLookupBehaviour outside_lookup_behaviour = 2;
+	string content = 3;
+}
+
+message PutLexiconResponse
+{
+}
+
+message DeleteLexiconRequest
+{
+	string uri = 1;
+}
+
+message DeleteLexiconResponse
+{
+}
+
+message GetLexiconRequest
+{
+	string uri = 1;
+}
+
+message GetLexiconResponse
+{
+	OutsideLookupBehaviour outside_lookup_behaviour = 1;
+	string content = 2;
+}
+
+message VoiceProfile
+{
+	string voice_name = 1;
+	int32 voice_variant = 2;
+	string language_code = 3;
+}
+
+message Marker
+{
+	int32 position = 1;
+	string name = 2;
+}
+
+message SynthesisConfig
+{
+	string language_code = 1;
+	Voice voice = 2;
+	ProsodicProperties prosodic_properties = 3;
+	optional int32 silence_duration_between_segments_ms = 4;
+}
+
+message OutputConfig
+{
+	AudioEncoding audio_encoding = 1;
+	int32 sampling_rate_hz = 2;
+	int32 max_frame_size = 3;
+}
+
+message Voice
+{
+	string name = 1;
+	optional Gender gender = 2;
+	optional Age age = 3;
+	int32 variant = 4;
+}
+
+message ProsodicProperties
+{
+	float pitch = 1;
+	float range = 2;
+	float rate = 3;
+	float stress = 4;
+	float volume = 5;
+}
+
+message VoiceInfo
+{
+	repeated string supported_languages = 1;
+	string name = 2;
+	Gender gender = 3;
+	Age age = 4;
+	int32 variants_count = 5;
+}
+
+message LexiconInfo
+{
+	string uri = 1;
+	OutsideLookupBehaviour outside_lookup_behaviour = 2;
+}
+
+enum Gender
+{
+	FEMALE = 0;
+	MALE = 1;
+}
+
+enum Age
+{
+	ADULT = 0;
+	CHILD = 1;
+	SENILE = 2;
+}
+
+enum AudioEncoding
+{
+	PCM16 = 0;
+	OGG_VORBIS = 1;
+	OGG_OPUS = 2;
+	A_LAW = 3;
+	MU_LAW = 4;
+}
+
+enum OutsideLookupBehaviour
+{
+	ALLOWED = 0;
+	DISALLOWED = 1;
+}
