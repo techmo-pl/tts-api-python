@@ -35,14 +35,6 @@ The package provides a precompiled collection of .proto files. These can be impo
 
 Example:
 
-- direct import
-
-```python
->>> import techmo_tts_pb2 as api
->>> hasattr(api, "SynthesizeRequest")
-True
-```
-
 - import from an alias module
 
 ```python
