@@ -4,4 +4,5 @@ build/
 __pycache__/
 .venv/
 .vscode/
+*.wav
 *pb2*
