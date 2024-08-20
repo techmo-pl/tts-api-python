@@ -95,40 +95,31 @@ grpc_service_address = "127.0.0.1:30384"
 synthesis_config = api.SynthesisConfig(
     language_code="pl",
     voice=api.Voice(
-        name="masza",
-        age=api.Age.SENILE,
-        gender=api.Gender.FEMALE,
-        variant=1), 
-    prosodic_properties=api.ProsodicProperties(
-        pitch=1, 
-        range=1, 
-        rate=1, 
-        stress=1, 
-        volume=1)
+        name="masza"),
 )
 
 
-output_config = api.OutputConfig(audio_encoding=api.AudioEncoding.PCM16, sampling_rate_hz = 8000, max_frame_size=0)
+output_config = api.OutputConfig(audio_encoding=api.AudioEncoding.PCM16, sampling_rate_hz = 22500, max_frame_size=0)
 
 
 with grpc.insecure_channel(grpc_service_address) as grpc_channel:
     tts_stub = api.TTSStub(grpc_channel)
-    request = api.SynthesizeRequest(text="jestem syntezatorem mowy techmo, porozmawiajmy!", synthesis_config=synthesis_config, output_config=output_config)
+    request = api.SynthesizeRequest(text="Jestem syntezatorem mowy Techmo, porozmawiajmy!", synthesis_config=synthesis_config, output_config=output_config)
     responses = b''
     for response in tts_stub.SynthesizeStreaming(request):
         responses+=response.audio
         with wave.open('output.wav', 'wb') as wav_file:
-        n_channels = 1
-        sampwidth = 2 # set properly! variable based on audio_encoding=api.AudioEncoding.PCM16
-        framerate = output_config.sampling_rate_hz
-        n_frames = len(responses) // sampwidth
- 
-        wav_file.setnchannels(n_channels)
-        wav_file.setsampwidth(sampwidth)
-        wav_file.setframerate(framerate)
-        wav_file.setnframes(n_frames)
+            n_channels = 1
+            sampwidth = 2 # set properly! variable based on audio_encoding=api.AudioEncoding.PCM16
+            framerate = output_config.sampling_rate_hz
+            n_frames = len(responses) // sampwidth
 
-        wav_file.writeframes(responses)
+            wav_file.setnchannels(n_channels)
+            wav_file.setsampwidth(sampwidth)
+            wav_file.setframerate(framerate)
+            wav_file.setnframes(n_frames)
+
+            wav_file.writeframes(responses)
 ```
 
 Generated audio will be saved in working directory as `output.wav`.
