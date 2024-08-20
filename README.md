@@ -93,8 +93,14 @@ with grpc.insecure_channel(grpc_service_address) as grpc_channel:
 Synthesize in streaming mode:
 
 ```python
-    
+
+import grpc
 import wave
+from tts_service_api import techmo_tts_api as api
+
+# This example assumes that the endpoint is an instance
+# of techmo.asr.api.v1p1.Asr service listening on the local 30384 port.
+grpc_service_address = "127.0.0.1:30384"
     
 synthesis_config = api.SynthesisConfig(
 	language_code="pl", 
