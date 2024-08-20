@@ -29,6 +29,8 @@ pip install --require-virtualenv .
 
 ## Usage
 
+Official [documentation](https://docs.techmo.ai/tts/tts_grpc_api.html).
+
 ### Import
 
 The package provides a precompiled collection of .proto files. These can be imported directly or through the alias modules.
@@ -54,7 +56,7 @@ import grpc
 from tts_service_api import techmo_tts_api as api
 
 # This example assumes that the endpoint is an instance
-# of techmo.asr.api.v1p1.Asr service listening on the local 30384 port.
+# of techmo.tts.api.v3.TTS service listening on the local 30384 port.
 grpc_service_address = "127.0.0.1:30384"
 
 with grpc.insecure_channel(grpc_service_address) as grpc_channel:
@@ -71,7 +73,7 @@ import grpc
 from tts_service_api import techmo_tts_api as api
 
 # This example assumes that the endpoint is an instance
-# of techmo.asr.api.v1p1.Asr service listening on the local 30384 port.
+# of techmo.tts.api.v3.TTS service listening on the local 30384 port.
 grpc_service_address = "127.0.0.1:30384"
 
 with grpc.insecure_channel(grpc_service_address) as grpc_channel:
@@ -91,7 +93,7 @@ import wave
 from tts_service_api import techmo_tts_api as api
 
 # This example assumes that the endpoint is an instance
-# of techmo.asr.api.v1p1.Asr service listening on the local 30384 port.
+# of techmo.tts.api.v3.TTS service listening on the local 30384 port.
 grpc_service_address = "127.0.0.1:30384"
     
 synthesis_config = api.SynthesisConfig(
