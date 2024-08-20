@@ -1,7 +1,3 @@
-**Table of contents**
-
-[[_ToC_]]
-
 # TTS Service API (Python)
 
 The collection of gRPC APIs for TTS Service solutions supplied as a Python package.
