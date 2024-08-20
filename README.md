@@ -95,7 +95,8 @@ grpc_service_address = "127.0.0.1:30384"
 synthesis_config = api.SynthesisConfig(
     language_code="pl",
     voice=api.Voice(
-        name="masza"),
+        name="masza",
+        variant=1,)
 )
 
 
