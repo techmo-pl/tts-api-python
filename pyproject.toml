@@ -3,7 +3,7 @@ requires = ["grpcio-tools>=1.49.4,<1.63", "setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tts_service_api_python"
+name = "techmo-tts-api"
 description = "Techmo TTS Service API"
 dynamic = ["version"]
 readme = { file = "README.md", content-type = "text/markdown" }
