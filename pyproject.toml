@@ -9,7 +9,7 @@ dynamic = ["version"]
 readme = { file = "README.md", content-type = "text/markdown" }
 authors = [{ name = "Techmo sp. z o.o", email = "kontakt@techmo.pl" }]
 requires-python = ">=3.10"
-dependencies = ["grpcio>=1.43.0", "protobuf<4,>=3.18.1"]
+dependencies = ["grpcio>=1.49.4,<1.63", "protobuf>=4.21.3,<5"]
 
 [project.urls]
 repository = "https://github.com/techmo-pl/tts-api-python"
