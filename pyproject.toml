@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [project.urls]
-repository = "https://github.com/techmo-pl/tts-service-api-python"
+repository = "https://github.com/techmo-pl/tts-api-python"
 
 [tool.setuptools.dynamic]
 version = { attr = "tts_service_api.VERSION.__version__" }
