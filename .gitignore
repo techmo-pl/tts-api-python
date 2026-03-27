@@ -1,0 +1,10 @@
+build/
+*.egg-info/
+.eggs/
+.tox/
+__pycache__/
+techmo/
+.venv/
+.vscode/
+pre-commit/
+_proto_staging/

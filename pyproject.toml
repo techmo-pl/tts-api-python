@@ -1,0 +1,36 @@
+[build-system]
+# grpcio-tools 1.71.0+ ships protobuf 6.x which generates stubs requiring Python>=3.9.
+# Keep <1.71.0 so generated stubs stay compatible with Python 3.8 (protobuf 5.29.x).
+requires = ["setuptools>=61", "grpcio-tools>=1.70.0,<1.71.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tts-service-api"
+description = "Techmo TTS Service API"
+dynamic = ["version"]
+readme = { file = "README.md", content-type = "text/markdown" }
+authors = [{ name = "Techmo sp. z o.o", email = "kontakt@techmo.pl" }]
+requires-python = ">=3.8"
+dependencies = [
+    # Generated stubs embed GRPC_GENERATED_VERSION='1.70.0'; grpcio 1.71.0 dropped Python 3.8.
+    "grpcio>=1.70.0,<1.71.0; python_version=='3.8'",
+    "grpcio>=1.70.0; python_version>='3.9'",
+    # Stubs generated with protobuf 5.29.x; protobuf 6.x requires Python>=3.9.
+    "protobuf>=5.29.0,<6.0.0; python_version=='3.8'",
+    "protobuf>=5.29.0; python_version>='3.9'",
+]
+
+[project.urls]
+repository = "https://github.com/techmo-pl/tts-service-api-python"
+
+[tool.setuptools.dynamic]
+version = { attr = "tts_service_api.VERSION.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["tts_service_api*", "techmo*"]
+
+[tool.mypy]
+
+[[tool.mypy.overrides]]
+module = ["techmo.*"]
+ignore_errors = true
