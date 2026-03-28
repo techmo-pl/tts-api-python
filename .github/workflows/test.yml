@@ -27,9 +27,7 @@ jobs:
           cache-dependency-glob: "pyproject.toml"
 
       - name: Build and install package
-        run: |
-          uv venv
-          uv pip install -e .
+        run: uv pip install -e .
 
       - name: Verify import
         run: uv run python -c "import tts_service_api; print(tts_service_api.VERSION.__version__)"
