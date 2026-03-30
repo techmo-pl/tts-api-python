@@ -7,7 +7,7 @@ The major version of this package tracks the TTS Service API major version.
 
 ## [Unreleased]
 
-## [3.2.2] - 2026-03-30
+## [3.2.1+1] - 2026-03-30
 
 ### Added
 - `AGENTS.md`: AI assistant context document describing the repo layout, import paths, stub generation workflow, shim package, and dependency constraints.
