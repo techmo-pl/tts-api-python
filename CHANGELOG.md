@@ -7,7 +7,7 @@ The major version of this package tracks the TTS Service API major version.
 
 ## [Unreleased]
 
-## [3.2.1] - 2026-03-27
+## [3.2.1] - 2026-03-30
 
 ### Changed
 - PyPI package renamed from `tts-service-api` to `tts-api` (ASR naming convention).
