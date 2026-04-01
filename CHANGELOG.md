@@ -7,6 +7,14 @@ The major version of this package tracks the TTS Service API major version.
 
 ## [Unreleased]
 
+## [3.2.2] - 2026-04-01
+
+### Fixed
+- Raised `grpcio` lower bound to `>=1.80.0` for Python 3.9+ (grpcio skips 1.79.x;
+  grpcio 1.78.x causes runtime failures when combined with livekit-agents>=1.5.1).
+  No stub regeneration required — generated stubs (GRPC_GENERATED_VERSION='1.70.0')
+  are forward-compatible with grpcio 1.80.0.
+
 ## [3.2.1+1] - 2026-03-30
 
 ### Added
