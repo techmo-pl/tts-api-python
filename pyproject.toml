@@ -1,6 +1,8 @@
 [build-system]
-# grpcio-tools 1.71.0+ ships protobuf 6.x which generates stubs requiring Python>=3.9.
-# Keep <1.71.0 so generated stubs stay compatible with Python 3.8 (protobuf 5.29.x).
+# grpcio-tools is the BUILD-TIME stub generator only — its version is independent of
+# the runtime grpcio lower bound (>=1.80.0 for 3.9+) set in [project.dependencies].
+# Keep <1.71.0: grpcio-tools 1.71.0+ ships protobuf 6.x which generates stubs
+# requiring Python>=3.9, breaking our Python 3.8 support.
 requires = ["setuptools>=61", "grpcio-tools>=1.70.0,<1.71.0"]
 build-backend = "setuptools.build_meta"
 
