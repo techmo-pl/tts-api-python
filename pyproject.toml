@@ -14,7 +14,11 @@ requires-python = ">=3.8"
 dependencies = [
     # Generated stubs embed GRPC_GENERATED_VERSION='1.70.0'; grpcio 1.71.0 dropped Python 3.8.
     "grpcio>=1.70.0,<1.71.0; python_version=='3.8'",
-    "grpcio>=1.70.0; python_version>='3.9'",
+    # grpcio skips 1.79.x (jumps 1.78.0→1.80.0); environments combining tts-api with
+    # livekit-agents>=1.5.1 fail at runtime with 1.78.x due to livekit's transitive stubs
+    # requiring grpcio>=1.80.0.  The generated stubs (GRPC_GENERATED_VERSION='1.70.0') are
+    # forward-compatible with 1.80.0, so no stub regeneration is needed.
+    "grpcio>=1.80.0; python_version>='3.9'",
     # Stubs generated with protobuf 5.29.x; protobuf 6.x requires Python>=3.9.
     "protobuf>=5.29.0,<6.0.0; python_version=='3.8'",
     "protobuf>=5.29.0; python_version>='3.9'",
