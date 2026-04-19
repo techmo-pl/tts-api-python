@@ -7,6 +7,14 @@ The major version of this package tracks the TTS Service API major version.
 
 ## [Unreleased]
 
+## [3.2.2+1] - 2026-04-19
+
+### Added
+- `CLAUDE.md`: one-line redirect to `AGENTS.md` for AI coding agents that auto-load `CLAUDE.md` (Claude Code, Codex, Cursor, Aider).
+
+### Changed
+- `submodules/tts-service-api`: updated to [v3.2.0+2](https://github.com/techmo-pl/tts-api/releases/tag/v3.2.0%2B2).
+
 ## [3.2.2] - 2026-04-01
 
 ### Fixed
